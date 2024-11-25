@@ -1,0 +1,140 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'League Spartan';
+    src: url('leaguespartan-bold.eot');
+    src: url('leaguespartan-bold.eot?#iefix') format('embedded-opentype'),
+         url('leaguespartan-bold.woff2') format('woff2'),
+         url('leaguespartan-bold.woff') format('woff'),
+         url('leaguespartan-bold.ttf') format('truetype'),
+         url('leaguespartan-bold.svg#league_spartanbold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+
+}
+
+html, body{
+	margin: 0;
+	padding: 0;
+	width: 100vw;
+	height: 100vh;
+	background-image: url("images/Wallpaper_ditta.png");
+	background-image: url("images/Wallpaper_ditta.png");
+    background-size: cover; /* Per coprire tutta l'area */
+    background-position: center; /* Per centrare l'immagine */
+    background-repeat: no-repeat; /* Evita che l'immagine si ripeta */
+	display: flex;
+    flex-direction: column;
+}
+
+body p{
+	font-family: 'League Spartan';
+}
+
+body h3{
+	font-family: 'League Spartan';
+}
+
+body a{
+	color: #aac8e6;
+	font-family: 'League Spartan';
+	text-decoration: none;
+}
+
+#flag{
+	color: red;
+	font-family: 'League Spartan';
+}
+
+#flag-ins{
+	color: green;
+	font-family: 'League Spartan';
+}
+
+
+
+#tab-login-op{
+	width: 300px;
+}
+
+#tab-reg-op{
+	width: 400px;
+}
+
+#tab-reg-op input[type="text"]{
+	width: 60%;
+	margin-bottom: 10px;
+	border: 0;
+	border-bottom: 1px solid grey;
+}
+
+#tab-reg-op input[type="password"]{
+	width: 60%;
+	border: 0;
+	border-bottom: 1px solid grey;
+}
+
+
+
+
+#tab-reg-cl{
+	width: 400px;
+}
+
+#tab-reg-cl input[type="text"]{
+	width: 80%;
+	margin-bottom: 10px;
+	border: 0;
+	border-bottom: 1px solid grey;
+}
+
+#tab-reg-cl input[type="password"]{
+	width: 80%;
+	border: 0;
+	border-bottom: 1px solid grey;
+}
+
+
+
+
+table{
+	width: 250px;
+	height: 100px;
+}
+
+table a{	
+	text-decoration: none;
+	font-family: 'League Spartan';
+	color: #aac8e6;
+	transition: border 0.3s ease, padding 0.3s ease;
+}
+
+table td a:hover{
+	border-radius: 5px;
+	padding: 5px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+input[type="text"]{
+	width: 80%;
+	margin-bottom: 10px;
+	border: 0;
+	border-bottom: 1px solid grey;
+}
+
+input[type="password"]{
+	width: 80%;
+	border: 0;
+	border-bottom: 1px solid grey;
+}
+
+input[type="submit"]{
+    border-radius: 5px;
+    border-style: none;
+}
+
+input[type="submit"]:hover{
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	background-color: #aac8e6;
+	transition: 0.5s;
+}
