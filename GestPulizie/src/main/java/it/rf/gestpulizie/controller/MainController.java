@@ -87,7 +87,7 @@ public class MainController {
 	}
 	
 	@GetMapping("/Logout")
-    public String Logoutt(HttpSession session) {
+    public String Logout(HttpSession session) {
 		session.invalidate();		
         return "Login";
 	}
