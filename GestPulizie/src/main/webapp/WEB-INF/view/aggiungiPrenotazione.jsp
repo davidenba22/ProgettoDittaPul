@@ -64,10 +64,10 @@
 	<div id="flag" align=center>${nessunClienteTrovato}</div>
 	<div id="flag-ins" align=center>${messaggioPren}</div>
 	<% 
-		Cliente clienteTrovato=(Cliente) request.getAttribute("clienteTrv");
-		List<Sede> sediClienteTrovato=(List<Sede>) request.getAttribute("elencoSediCliente");	
+		Cliente clienteTrovato=(Cliente) session.getAttribute("clienteTrv");
+		List<Sede> sediClienteTrovato=(List<Sede>) session.getAttribute("elencoSediCliente");	
 	
-		if(clienteTrovato != null){
+		if(sediClienteTrovato.size() > 0){
 	%>
 		<form action=sedePrenotazione method=Post>
 			<table border=1 align=center style="margin-top:10px; margin-bottom: 20px;">

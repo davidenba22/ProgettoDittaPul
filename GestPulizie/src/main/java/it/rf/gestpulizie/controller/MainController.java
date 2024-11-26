@@ -105,9 +105,7 @@ public class MainController {
 		Optional<Cliente> clienteTrovato=this.cs.findClienteByUserAndPwd(username, password);
 		
 		if(clienteTrovato.isPresent()) {
-			//List<Sede> sediClienteTrovato=this.sedeS.findSedeByCfCliente(clienteTrovato.get().getCfCliente());
-			//x.addAttribute("elencoSediCliente", sediClienteTrovato);
-			session.setAttribute("ClienteLoggato", clienteTrovato);
+			session.setAttribute("ClienteLoggato", clienteTrovato.get());
 			return "sezioneCliente";
 		}
 		else {
@@ -208,7 +206,7 @@ public class MainController {
 			
 			CategoriaOperaio opTrv=(CategoriaOperaio) opTrovato.get().getOpCat();
 			if(opTrv.getIdCategoria() == 1) {
-				session.setAttribute("OperaioLoggato", opTrovato);
+				session.setAttribute("OperaioLoggato", opTrovato.get());
 				return "Admin";
 			}
 			else{
@@ -225,13 +223,24 @@ public class MainController {
 	
 	//--------------AREA OPERAI---------------------
 	@GetMapping("/sezioneOperai")
-    public String sezioneOperai() {
-        return "sezioneOperai";
+    public String sezioneOperai(HttpSession session) {
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
+		return "sezioneOperai";
 	}
 	
 	
 	@GetMapping("/ricIntervOp")
-    public String ricIntervOp() {
+    public String ricIntervOp(HttpSession session) {
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
         return "ricercaInterventiOperaio";
 	}
 	
@@ -261,7 +270,13 @@ public class MainController {
 	}
 	
 	@GetMapping("/interventiOp")
-    public String interventiOperaio() {
+    public String interventiOperaio(HttpSession session) {
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "interventiOperaio";
 	}
 	
@@ -353,14 +368,26 @@ public class MainController {
 	//----------------OPERAIO-------------------
 	
 	@GetMapping("/Operai")
-	public String Operai() {
+	public String Operai(HttpSession session) {
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "Operai";
 	}
 	
 	
 	
 	@GetMapping("/insOp")
-    public String insOp(Model x) {
+    public String insOp(Model x, HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
 		
 		List<CategoriaOperaio> elencoCat=this.cos.ElencoCategoria();
 
@@ -412,7 +439,14 @@ public class MainController {
 	
 	
 	@GetMapping("/ricOp")
-    public String ricOp() {
+    public String ricOp(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "ricercaOperaio";
 	}
 	
@@ -442,7 +476,14 @@ public class MainController {
 	
 	
 	@GetMapping("/modOp")
-	public String modOp(Model x) {
+	public String modOp(Model x, HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
 		return "modificaOperaio";
 	}
 	
@@ -527,14 +568,28 @@ public class MainController {
 	
 	//-------------------CATEGORIA---------------------------
 	@GetMapping("/Categoria")
-    public String Categoria() {
+    public String Categoria(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "Categoria";
 	}
 	
 	
 	
 	@GetMapping("/addCat")
-    public String addCat() {
+    public String addCat(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "aggiungiCategoria";
 	}
 	
@@ -542,6 +597,7 @@ public class MainController {
 	
 	@PostMapping("/aggiungiCategoria")
     public String aggiungiCategoria(Model x, @ModelAttribute CategoriaOperaio co) {
+		
 		Boolean esito;
 		
 		esito=this.cos.addCategoria(co);
@@ -559,10 +615,15 @@ public class MainController {
 	
 	
 	@GetMapping("/modCat")
-    public String modCat() {
+    public String modCat(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
 		
         return "modificaCategoria";
-	
 	}
 	
 	
@@ -604,7 +665,13 @@ public class MainController {
 	
 	
 	@GetMapping("/ricCat")
-    public String ricCat() {
+    public String ricCat(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
 		
         return "ricercaCategoria";
 	
@@ -631,13 +698,27 @@ public class MainController {
 	
 	//---------------SERVIZI---------------------
 	@GetMapping("/Servizi")
-    public String Servizi() {
+    public String Servizi(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "Servizi";
 	}
 	
 	
 	@GetMapping("/insServ")
-    public String insServizio() {
+    public String insServizio(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "inserimentoServizio";
 	}
 	
@@ -660,7 +741,14 @@ public class MainController {
 	
 	
 	@GetMapping("/modServ")
-    public String modServ() {
+    public String modServ(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "modificaServizio";
 	}
 	
@@ -721,14 +809,35 @@ public class MainController {
 	//--------------------PRENOTAZIONI----------------------------
 	
 	@GetMapping("/Prenotazioni")
-	public String Prenotazioni() {
+	public String Prenotazioni(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
+		List<Sede> sediCliente=(List<Sede>) session.getAttribute("elencoSediCliente");
+		
+		if(sediCliente.size() > 0){
+			sediCliente.clear();
+			return "aggiungiPrenotazione";
+		}
+		
         return "Prenotazioni";
 	}
 	
 	
 	
 	@GetMapping("/addPren")
-    public String addPrenotazioni() {
+    public String addPrenotazioni(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
 		return "aggiungiPrenotazione";
 	}
 	
@@ -742,7 +851,7 @@ public class MainController {
 			x.addAttribute("nessunClienteTrovato","Nessuna corrispondenza");
 			return "aggiungiPrenotazione";
 		}
-		
+
 		if(sediClienteTrovato.size() == 0) {
 			x.addAttribute("nessunaSedeClienteScelto","Questo cliente non possiede alcuna sede");
 			return "aggiungiPrenotazione";
@@ -753,10 +862,7 @@ public class MainController {
 			//Sessione utilizzata per potermi passare i dati nel  
 			//form successivo a questo (in basso)
 			session.setAttribute("clienteTrv", clTrv.get());
-			
-			
-			x.addAttribute("clienteTrv", clTrv.get());
-			x.addAttribute("elencoSediCliente", sediClienteTrovato);
+			session.setAttribute("elencoSediCliente", sediClienteTrovato);
 		}
 		
 		return "aggiungiPrenotazione";
@@ -816,7 +922,14 @@ public class MainController {
 	
 	
 	@GetMapping("/addServPren")
-    public String addServiziPrenotazione() {	
+    public String addServiziPrenotazione(HttpSession session) {	
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "addServiziPrenotazione";
 	}
 	
@@ -913,7 +1026,14 @@ public class MainController {
 
 	
 	@GetMapping("/modPren")
-    public String modPren() {
+    public String modPren(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "modificaPrenotazione";
 	}
 	
@@ -1043,7 +1163,14 @@ public class MainController {
 	
 	
 	@GetMapping("/ricPren")
-    public String ricPren() {
+    public String ricPren(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "ricercaPrenotazione";
 	}
 	
@@ -1073,14 +1200,28 @@ public class MainController {
 	//------------------SQUADRA------------------------
 	
 	@GetMapping("/Squadra")
-    public String Squadra() {
+    public String Squadra(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "Squadra";
 	}
 	
 	
 	
 	@GetMapping("/addSq")
-    public String addSq() {
+    public String addSq(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "creaSquadra";
 	}
 	
@@ -1150,7 +1291,14 @@ public class MainController {
 	
 	
 	@GetMapping("/modSq")
-    public String modSq() {
+    public String modSq(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "modificaSquadra";
 	}
 	
@@ -1213,19 +1361,40 @@ public class MainController {
 	
 	//-------------CLIENTE--------------------
 	@GetMapping("/Cliente")
-    public String Cliente() {
+    public String Cliente(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "Cliente";
 	}
 	
 	
 	@GetMapping("/sezioneCliente")
-    public String sezioneCliente() {
+    public String sezioneCliente(HttpSession session) {
+		
+		Cliente cl=(Cliente) session.getAttribute("ClienteLoggato");
+		
+		if(cl == null) {
+			return "Login";
+		}
+		
         return "sezioneCliente";
 	}
 	
 	
 	@GetMapping("/prenCl")
-    public String prenCl() {
+    public String prenCl(HttpSession session) {
+		
+		Cliente cl=(Cliente) session.getAttribute("ClienteLoggato");
+		
+		if(cl == null) {
+			return "Login";
+		}
+		
         return "prenotazioneCliente";
 	}
 	
@@ -1292,7 +1461,14 @@ public class MainController {
 	
 	
 	@GetMapping("/addCl")
-    public String addCl() {
+    public String addCl(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "aggiungiCliente";
 	}
 	
@@ -1329,7 +1505,14 @@ public class MainController {
 	
 	
 	@GetMapping("/modCl")
-    public String modCl() {
+    public String modCl(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "modificaCliente";
 	}
 	
@@ -1378,7 +1561,14 @@ public class MainController {
 	
 	
 	@GetMapping("/ricCl")
-    public String ricCl() {
+    public String ricCl(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "ricercaCliente";
 	}
 	
@@ -1406,7 +1596,14 @@ public class MainController {
 	
 	
 	@GetMapping("/addCont")
-	public String addCont() {
+	public String addCont(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
 		return "creaContratto";
 	}
 	
@@ -1445,13 +1642,27 @@ public class MainController {
 	
 	//------------SEDE-----------------
 	@GetMapping("/Sede")
-    public String Sede() {
+    public String Sede(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "Sede";
 	}
 	
 	
 	@GetMapping("/addSede")
-    public String addSede() {
+    public String addSede(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "aggiungiSede";
 	}
 	
@@ -1475,7 +1686,14 @@ public class MainController {
 	
 	
 	@GetMapping("/modSede")
-    public String modSede() {
+    public String modSede(HttpSession session) {
+		
+		Operaio op=(Operaio) session.getAttribute("OperaioLoggato");
+		
+		if(op == null) {
+			return "Login";
+		}
+		
         return "modificaSede";
 	}
 	
